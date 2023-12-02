@@ -128,3 +128,136 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.nav {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  background-color: lightgray;
+}
+
+.site-name h1 {
+  display: block;
+  padding: 0px 14px;
+  color: black;
+}
+
+.site-name a {
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.nav-options ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 1.25rem;
+}
+
+.nav-options ul a {
+  display: block;
+  padding: 36px;
+  text-decoration: none;
+  color: black;
+}
+
+.top-bar {
+  border-bottom: 40px solid black;
+  margin-bottom: 30px;
+}
+
+.cover-img1 {
+  text-align: center;
+}
+
+.product-adv h3 {
+  font-size: 2rem;
+  padding-top: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.product-adv ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.product-adv li {
+  display: block;
+  margin: 0 20px;
+  height: 150px;
+  width: 270px;
+  background-color: grey;
+  outline: 2px solid red;
+}
+
+.table-wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.product-comparism {
+  padding: 50px 0 60px 0;
+  /* outline: 2px solid red; */
+}
+
+.product-comparism table {
+  width: 100%;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  outline: 2px solid black;
+}
+
+.product-comparism th {
+  font-size: 2rem;
+}
+
+.user-review {
+  text-align: center;
+  padding: 50px 0 60px 0;
+}
+
+.user-review-wall {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 30px;
+  background-color: brown;
+}
+
+.shipping-method {
+  text-align: center;
+  height: 400px;
+  width: 100%;
+  background-color: lightblue;
+}
+
+.product-page h3 {
+  font-size: 2rem;
+  padding-top: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.product-filter {
+  margin-bottom: 30px;
+}
+
+.product-board-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content:center;
+  margin: 0 auto;
+  width: 80%;
+  outline: 2px solid red;
+}
+
+.product-board-wrapper hr {
+  width: 100%;
+}

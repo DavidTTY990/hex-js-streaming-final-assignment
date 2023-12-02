@@ -1,221 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hex JS Final Assignment</title>
-    <style>
-        .nav {
-            display: block;
-            justify-content: space-between;
-            align-items: center;
-            text-decoration: none;
-            background-color: lightgray;
-        }
-
-        .site-name h1 {
-            display: block;
-            padding: 0px 14px;
-            color: black;
-        }
-
-        .site-name a {
-            text-decoration: none;
-            display: block;
-            color: black;
-        }
-
-        .nav-options ul {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            font-size: 1.25rem;
-        }
-
-        .nav-options ul a {
-            display: block;
-            padding: 36px;
-            text-decoration: none;
-            color: black;
-        }
-
-        .top-bar {
-            border-bottom: 40px solid black;
-            margin-bottom: 30px;
-        }
-
-        .cover-img1 {
-            text-align: center;
-        }
-
-        .product-adv h3 {
-            font-size: 2rem;
-            padding-top: 60px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .product-adv ul {
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .product-adv li {
-            display: block;
-            margin: 0 20px;
-            height: 150px;
-            width: 270px;
-            background-color: grey;
-            outline: 2px solid red;
-        }
-
-        .table-wrapper {
-            width: 70%;
-            margin: 0 auto;
-        }
-
-        .product-comparism {
-            padding: 50px 0 60px 0;
-            /* outline: 2px solid red; */
-        }
-
-        .product-comparism table {
-            width: 100%;
-            margin-bottom: 30px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            outline: 2px solid red;
-        }
-
-        .product-comparism th {
-            font-size: 2rem;
-        }
-    </style>
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="../src/style.css" />
     <!-- bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <div class="site-wrapper">
-        <nav class="nav">
-            <div class="site-name">
-                <a href=""><h1>The EC Site</h1></a>
-            </div>
-            <div class="nav-options">
-                <ul>
-                    <li><a href="">產品優勢</a></li>
-                    <li><a href="">好評回饋</a></li>
-                    <li><a href="">運送方式</a></li>
-                    <li><a href="">立刻下訂</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="top-bar"></div>
-        <section class="cover-img">
-            <div class="cover-img1">
-                <img src="../src/img/01 Singer911 Top Gear.webp" alt="">
-            </div>
-        </section>
-        <section class="product-adv">
-            <h3>產品優勢</h3>
-            <ul>
-                <li>
-                    <img src="" alt="">
-                    <p>test</p>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <p>test</p>
-                </li>
-                <li>
-                    <img src="" alt="">
-                    <p>test</p>
-                </li>
+      <nav class="nav">
+        <div class="site-name">
+          <a href=""><h1>The EC Site</h1></a>
+        </div>
+        <div class="nav-options">
+          <ul>
+            <li><a href="">產品優勢</a></li>
+            <li><a href="">好評回饋</a></li>
+            <li><a href="">運送方式</a></li>
+            <li><a href="">立刻下訂</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="top-bar"></div>
+      <section class="cover-img">
+        <div class="cover-img1">
+          <img src="../src/img/01 Singer911 Top Gear.webp" alt="" />
+        </div>
+      </section>
+      <section class="product-adv">
+        <h3>產品優勢</h3>
+        <ul>
+          <li>
+            <img src="" alt="" />
+            <p>test</p>
+          </li>
+          <li>
+            <img src="" alt="" />
+            <p>test</p>
+          </li>
+          <li>
+            <img src="" alt="" />
+            <p>test</p>
+          </li>
+        </ul>
+      </section>
+      <section class="product-comparism">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <h3>產品比較 (為什麼不能置中哭哭)</h3>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>Singer 911</td>
+                <td>RUF 911</td>
+                <td>Regular 911</td>
+              </tr>
+              <tr>
+                <td>全車整新</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>性能調教</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>客製材質規格</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>長久使用</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>永久回廠保養</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="user-review">
+        <h3>好評回饋</h3>
+        <div class="user-review-wall"></div>
+      </section>
+      <section class="shipping-method">
+        <h3>運送方式</h3>
+        <div class="shipping-steps">
+          <ul>
+            <li>step1</li>
+            <li>step2</li>
+            <li>step3</li>
+            <li>step4</li>
+          </ul>
+        </div>
+      </section>
+      <section class="product-page">
+        <h3>商品列表</h3>
+        <div class="product-filter">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-        </section>
-        <section class="product-comparism">
-            <div class="table-wrapper">
-                <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <h3>產品比較</h3>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Singer 911</td>
-                        <td>RUF 911</td>
-                        <td>Regular 911</td>
-                    </tr>
-                    <tr>
-                        <td>全車整新</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>性能調教</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>客製材質規格</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>長久使用</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>永久回廠保養</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </section>
-        <section class="user-review">
-            <h3>好評回饋</h3>
-            <div class="user-review-wall"></div>
-        </section>
-        <section class="shipping-method">
-            <h3>運送方式</h3>
-            <div class="shipping-steps">
-                <ul>
-                    <li>step1</li>
-                    <li>step2</li>
-                    <li>step3</li>
-                    <li>step4</li>
-                </ul>
-            </div>
-        </section>
-        <section class="product-page">
-            <div class="product-filter">Product filter</div>
-            <div class="product-board"></div>
-        </section>
-        <section class="shop-cart">
-            <h3>我的購物車</h3>
-        </section>
-        <section class="personal-info">
-            <h3>填寫訂購資料</h3>
-            <form action=""></form>
-        </section>
+          </div>
+        </div>
+        <div class="product-board-wrapper">
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+              <hr>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            <div class="card" style="width: 17rem">
+                <img src="..." class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make up
+                    the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+        </div>
+      </section>
+      <section class="shop-cart">
+        <h3>我的購物車</h3>
+      </section>
+      <section class="personal-info">
+        <h3>填寫訂購資料</h3>
+        <form action=""></form>
+      </section>
     </div>
 
     <!-- bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
