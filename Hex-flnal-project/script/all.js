@@ -14,7 +14,6 @@ function getProductList() {
     .then((res) => {
       const productList = res.data.products;
       productList.forEach((item) => {
-        console.log(item);
         productWrap.innerHTML += `<li class="productCard">
             <h4 class="productType">新品</h4>
             <img
@@ -29,18 +28,39 @@ function getProductList() {
       });
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
+      alert("取得產品列表失敗，請聯繫親切的工程師");
     });
 }
 // 取得購物車列表，載入頁面時直接執行
 
-const cardItem = document.querySelector(".card-item");
+const cardItemWrapper = document.querySelector(".card-item-wrapper");
+getCardItem();
 
 function getCardItem() {
   axios
-    .get("livejs-api.hexschool.io/api/livejs/v1/customer/davidtt/carts")
+    .get("https://livejs-api.hexschool.io/api/livejs/v1/customer/davidtt/carts")
     .then((res) => {
-      console.log(res);
+      res.data.carts.forEach((item) => {
+        cardItemWrapper.innerHTML += `<tr class="card-item">
+        <td>
+          <div class="cardItem-title">
+            <img src="${item.product.images}" alt="" />
+            <p>${item.product.title}</p>
+          </div>
+        </td>
+        <td>NT$${item.product.price}</td>
+        <td>${item.quantity}</td>
+        <td>NT$${item.product.price * item.quantity}</td>
+        <td class="discardBtn">
+          <a href="#" class="material-icons"> clear </a>
+        </td>
+      </tr>`;
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("取得購物車列表失敗，請聯繫親切的工程師");
     });
 }
 // 加入購物車
