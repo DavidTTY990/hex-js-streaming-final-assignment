@@ -1,16 +1,17 @@
 // 前台 JS
 
+// consts
+const baseUrl = "https://livejs-api.hexschool.io";
+const api_path = "davidtt";
+
 // 取得產品列表，載入頁面時直接執行
-// 取得產品列表 DOM
 const productWrap = document.querySelector(".productWrap");
 
 getProductList();
 
 function getProductList() {
   axios
-    .get(
-      "https://livejs-api.hexschool.io/api/livejs/v1/customer/davidtt/products"
-    )
+    .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/products`)
     .then((res) => {
       const productList = res.data.products;
       productList.forEach((item) => {
@@ -35,11 +36,12 @@ function getProductList() {
 // 取得購物車列表，載入頁面時直接執行
 
 const cardItemWrapper = document.querySelector(".card-item-wrapper");
+const shoppingCartTotal = document.querySelector(".shoppingCartTotal");
 getCardItem();
 
 function getCardItem() {
   axios
-    .get("https://livejs-api.hexschool.io/api/livejs/v1/customer/davidtt/carts")
+    .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
       res.data.carts.forEach((item) => {
         cardItemWrapper.innerHTML += `<tr class="card-item">
@@ -57,6 +59,7 @@ function getCardItem() {
         </td>
       </tr>`;
       });
+      shoppingCartTotal.innerText = `NT$${res.data.finalTotal.toLocaleString()}`;
     })
     .catch((err) => {
       console.log(err);
@@ -68,7 +71,24 @@ function getCardItem() {
 // 編輯購物車產品數量
 
 // 刪除所有購物車資料
+const discardAllBtn = document.querySelector(".discardAllBtn");
+discardAllBtn.addEventListener("click", discardAll);
 
+function discardAll(e) {
+  e.preventDefault();
+  axios
+    .delete(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
+    .then((res) => {
+      cardItemWrapper.innerHTML = "購物車內沒有商品";
+    })
+    .catch((err) => {
+      if (err.response.data.message) {
+        alert("購物車已經是空的囉！");
+      } else {
+        alert("刪除購物車項目失敗，請聯繫親切的工程師");
+      }
+    });
+}
 // 刪除特定購物車資料
 
 // 送出購買訂單
