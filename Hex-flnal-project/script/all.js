@@ -9,12 +9,10 @@ init();
 
 function init() {
   getProductList();
-  getCardItem();
+  // getCardItem();
 }
 // 取得產品列表
 const productWrap = document.querySelector(".productWrap");
-
-getProductList();
 
 function getProductList() {
   axios
@@ -42,28 +40,50 @@ function getProductList() {
 }
 // 取得購物車列表
 const cardItemWrapper = document.querySelector(".card-item-wrapper");
-const shoppingCartTable = document.querySelector(".shoppingCart-table")
+const shoppingCartTable = document.querySelector(".shoppingCart-table");
 const shoppingCartTotal = document.querySelector(".shoppingCartTotal");
 
 function getCardItem() {
   axios
     .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
-      res.data.carts.forEach((item, index) => {
-        let newRow = shoppingCartTable.insertRow(index + 2);
-        newRow.innerHTML = `<td>
-           <div class="cardItem-title">
-             <img src="${item.product.images}" alt="" />
-             <p>${item.product.title}</p>
-           </div>
-         </td>
-         <td>NT$${item.product.price}</td>
-         <td>${item.quantity}</td>
-         <td>NT$${item.product.price * item.quantity}</td>
-         <td class="discardBtn">
-           <a href="#" class="material-icons"> clear </a>
-         </td>`;
+      shoppingCartTable.innerHTML = "";
+      let string = `<caption></caption><tr>
+      <th width="40%">品項</th>
+      <th width="15%">單價</th>
+      <th width="15%">數量</th>
+      <th width="15%">金額</th>
+      <th width="15%"></th>
+    </tr>`
+      res.data.carts.forEach((item) => {
+        string += `
+        <td>
+            <div class="cardItem-title">
+              <img src="${item.product.images}" alt="" />
+              <p>${item.product.title}</p>
+            </div>
+          </td>
+          <td>NT$${item.product.price}</td>
+          <td>${item.quantity}</td>
+          <td>NT$${item.product.price * item.quantity}</td>
+          <td class="discardBtn">
+            <a href="#" class="material-icons"> clear </a>
+          </td>
+        `;
       });
+
+      string + `<tr>
+      <td>
+        <a href="#" class="discardAllBtn">刪除所有品項</a>
+      </td>
+      <td></td>
+      <td></td>
+      <td>
+        <p>總金額</p>
+      </td>
+      <td class="shoppingCartTotal">NT$0</td>
+    </tr>`
+    shoppingCartTable.innerHTML += string
       shoppingCartTotal.innerText = `NT$${res.data.finalTotal.toLocaleString()}`;
       addToCartBtnListener();
     })
@@ -72,6 +92,19 @@ function getCardItem() {
       alert("取得購物車列表失敗，請聯繫親切的工程師");
     });
 }
+
+// `<td>
+//            <div class="cardItem-title">
+//              <img src="${item.product.images}" alt="" />
+//              <p>${item.product.title}</p>
+//            </div>
+//          </td>
+//          <td>NT$${item.product.price}</td>
+//          <td>${item.quantity}</td>
+//          <td>NT$${item.product.price * item.quantity}</td>
+//          <td class="discardBtn">
+//            <a href="#" class="material-icons"> clear </a>
+//          </td>`
 
 // 為按鈕加上監聽，取得購物車列表時就直接呼叫
 function addToCartBtnListener() {
@@ -91,12 +124,12 @@ function addToCart(e) {
       },
     })
     .then((res) => {
-      alert("新增購物車成功")
+      alert("新增購物車成功");
       getCardItem();
     })
     .catch((err) => {
-      alert("新增購物車失敗")
-    })
+      alert("新增購物車失敗");
+    });
 }
 // 編輯購物車產品數量
 
