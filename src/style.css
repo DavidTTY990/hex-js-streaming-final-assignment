@@ -275,6 +275,12 @@ table {
   background-color: lightblue;
 }
 
+.shop-cart table {
+  height: 400px;
+  width: 100%;
+  background-color: lightblue;
+}
+
 .shop-cart h3 {
   font-size: 2rem;
   padding-top: 60px;

@@ -4,7 +4,14 @@
 const baseUrl = "https://livejs-api.hexschool.io";
 const api_path = "davidtt";
 
-// 取得產品列表，載入頁面時直接執行
+// 取得產品列表與購物車列表，載入頁面時直接執行 init
+init();
+
+function init() {
+  getProductList();
+  getCardItem();
+}
+// 取得產品列表
 const productWrap = document.querySelector(".productWrap");
 
 getProductList();
@@ -33,36 +40,35 @@ function getProductList() {
       alert("取得產品列表失敗，請聯繫親切的工程師");
     });
 }
-
-// 取得購物車列表，載入頁面時直接執行
-getCardItem();
+// 取得購物車列表
 const cardItemWrapper = document.querySelector(".card-item-wrapper");
+const shoppingCartTable = document.querySelector(".shoppingCart-table")
 const shoppingCartTotal = document.querySelector(".shoppingCartTotal");
 
 function getCardItem() {
   axios
     .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
-      res.data.carts.forEach((item) => {
-        cardItemWrapper.innerHTML = `<tr class="card-item">
-        <td>
-          <div class="cardItem-title">
-            <img src="${item.product.images}" alt="" />
-            <p>${item.product.title}</p>
-          </div>
-        </td>
-        <td>NT$${item.product.price}</td>
-        <td>${item.quantity}</td>
-        <td>NT$${item.product.price * item.quantity}</td>
-        <td class="discardBtn">
-          <a href="#" class="material-icons"> clear </a>
-        </td>
-</tr>`;
+      res.data.carts.forEach((item, index) => {
+        let newRow = shoppingCartTable.insertRow(index + 2);
+        newRow.innerHTML = `<td>
+           <div class="cardItem-title">
+             <img src="${item.product.images}" alt="" />
+             <p>${item.product.title}</p>
+           </div>
+         </td>
+         <td>NT$${item.product.price}</td>
+         <td>${item.quantity}</td>
+         <td>NT$${item.product.price * item.quantity}</td>
+         <td class="discardBtn">
+           <a href="#" class="material-icons"> clear </a>
+         </td>`;
       });
       shoppingCartTotal.innerText = `NT$${res.data.finalTotal.toLocaleString()}`;
       addToCartBtnListener();
     })
     .catch((err) => {
+      console.log(err);
       alert("取得購物車列表失敗，請聯繫親切的工程師");
     });
 }
@@ -77,7 +83,6 @@ function addToCartBtnListener() {
 // 加入購物車
 function addToCart(e) {
   e.preventDefault();
-  cardItemWrapper.innerHTML = "";
   axios
     .post(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`, {
       data: {
@@ -86,8 +91,12 @@ function addToCart(e) {
       },
     })
     .then((res) => {
+      alert("新增購物車成功")
       getCardItem();
-    });
+    })
+    .catch((err) => {
+      alert("新增購物車失敗")
+    })
 }
 // 編輯購物車產品數量
 
