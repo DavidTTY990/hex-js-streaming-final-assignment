@@ -50,11 +50,19 @@ function addToCartBtnListener() {
 // 加入購物車
 function addToCart(e) {
   e.preventDefault();
+  let itemNum = 1;
+  cardItem.forEach(item => {
+    if(item.product.id === e.target.dataset.id) {
+      itemNum += item.quantity;
+    } else {
+      return;
+    }
+  })
   axios
     .post(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`, {
       data: {
         productId: `${e.target.dataset.id}`,
-        quantity: 1,
+        quantity: itemNum,
       },
     })
     .then((res) => {
@@ -67,15 +75,16 @@ function addToCart(e) {
 }
 
 // 取得購物車列表
-const cardItemWrapper = document.querySelector(".card-item-wrapper");
 const shoppingCartTable = document.querySelector(".shoppingCart-table");
 const shoppingCartTotal = document.querySelector(".shoppingCartTotal");
+let cardItem = [];
+
 
 function getCardItem() {
   axios
     .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
-      console.log(res.data);
+      cardItem = res.data.carts;
       shoppingCartTable.innerHTML = "";
       let string = `<caption></caption><tr>
       <th width="40%">品項</th>
@@ -97,7 +106,7 @@ function getCardItem() {
           <td>${item.quantity}</td>
           <td>NT$${(item.product.price * item.quantity).toLocaleString()}</td>
           <td class="discardBtn">
-            <a href="#" class="material-icons"> clear </a>
+            <a href="#" class="material-icons" data-id=${item.id}> clear </a>
           </td>
         </tr>
         `;
@@ -116,7 +125,7 @@ function getCardItem() {
       // TODO: 寫一個判斷式，如果購物車是空的，就插入一段文字「購物車內沒有商品」
       shoppingCartTable.innerHTML = string;
       const discardAllBtn = document.querySelector(".discardAllBtn");
-      discardAllBtn.addEventListener("click", discardAll);
+      discardAllBtn.addEventListener("click", discardAllItems);
     })
     .catch((err) => {
       console.log(err);
@@ -126,22 +135,37 @@ function getCardItem() {
 // 編輯購物車產品數量
 
 // 刪除所有購物車資料
-function discardAll(e) {
+function discardAllItems(e) {
   e.preventDefault();
   axios
     .delete(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
       alert('所有品項刪除成功')
+      getCardItem();
     })
     .catch((err) => {
       if (err.response.data.message) {
         alert("購物車已經是空的囉！");
-        getCardItem();
       } else {
         alert("刪除購物車項目失敗，請聯繫親切的工程師");
       }
     });
 }
 // 刪除特定購物車資料
+shoppingCartTable.addEventListener('click', deleteItem);
+function deleteItem(e) {
+  e.preventDefault();
+  const targetItemId = e.target.getAttribute('data-id');
+  if(targetItemId) {
+    axios.delete(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts/${targetItemId}`)
+    .then((res) => {
+      alert('指定品項刪除成功')
+      getCardItem();
+    })
+    .catch((err) => {
+      alert('指定品項刪除失敗，請聯繫親切的工程師')
+    })
+  }
 
+}
 // 送出購買訂單
