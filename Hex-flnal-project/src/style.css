@@ -601,6 +601,11 @@ body {
   padding: 60px 0;
 }
 
+.emptyCartMessage {
+  text-align: center;
+  font-size: 30px;
+}
+
 .shoppingCart-table {
   margin: 0 auto;
   border-collapse: collapse;

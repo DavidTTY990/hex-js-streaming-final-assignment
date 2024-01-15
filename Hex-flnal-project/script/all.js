@@ -75,6 +75,7 @@ function addToCart(e) {
 }
 
 // 取得購物車列表
+const shoppingCart = document.querySelector(".shoppingCart")
 const shoppingCartTable = document.querySelector(".shoppingCart-table");
 const shoppingCartTotal = document.querySelector(".shoppingCartTotal");
 let cardItem = [];
@@ -123,9 +124,19 @@ function getCardItem() {
       <td class="shoppingCartTotal">NT$${res.data.finalTotal.toLocaleString()}</td>
     </tr>`;
       // TODO: 寫一個判斷式，如果購物車是空的，就插入一段文字「購物車內沒有商品」
-      shoppingCartTable.innerHTML = string;
-      const discardAllBtn = document.querySelector(".discardAllBtn");
-      discardAllBtn.addEventListener("click", discardAllItems);
+
+      if(cardItem.length <= 0) {
+        let emptyCartMessage = document.createElement("p");
+        emptyCartMessage.innerText = "購物車內還沒有商品";
+        emptyCartMessage.className = "emptyCartMessage";
+        shoppingCart.appendChild(emptyCartMessage);
+      } else {
+        let targetRemoveMsg = document.querySelector(".emptyCartMessage")
+        targetRemoveMsg && shoppingCart.removeChild(targetRemoveMsg);
+        shoppingCartTable.innerHTML = string;
+        const discardAllBtn = document.querySelector(".discardAllBtn");
+        discardAllBtn.addEventListener("click", discardAllItems);
+      }
     })
     .catch((err) => {
       console.log(err);
