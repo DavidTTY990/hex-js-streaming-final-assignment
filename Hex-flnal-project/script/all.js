@@ -15,13 +15,9 @@ function init() {
 const productWrap = document.querySelector(".productWrap");
 let productList = [];
 
-function getProductList() {
-  axios
-    .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/products`)
-    .then((res) => {
-      productList = res.data.products;
-      productList.forEach((item) => {
-        productWrap.innerHTML += `<li class="productCard">
+function renderProductList(productList, domLocation) {
+  productList.forEach((item) => {
+    productWrap.innerHTML += `<li class="productCard">
             <h4 class="productType">新品</h4>
             <img
               src="${item.images}"
@@ -32,8 +28,18 @@ function getProductList() {
             <del class="originPrice">NT$${item.origin_price}</del>
             <p class="nowPrice">NT$${item.price}</p>
           </li>`;
-      });
+  });
+}
+
+function getProductList() {
+  console.log("[果實家居] 取得產品列表...");
+  axios
+    .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/products`)
+    .then((res) => {
+      productList = res.data.products;
+      renderProductList(productList, productWrap)
       addToCartBtnListener();
+      console.log("[果實家居] 取得產品列表成功。")
     })
     .catch((err) => {
       console.log(err);
@@ -49,7 +55,7 @@ function filterProductList(e) {
   productWrap.innerHTML = "";
   let filteredProductList = [];
   let targetValue = e.target.value;
-  if(targetValue === '全部') {
+  if (targetValue === "全部") {
     filteredProductList = productList;
   } else {
     filteredProductList = productList.filter(
@@ -58,19 +64,9 @@ function filterProductList(e) {
   }
 
   filteredProductList.forEach((item) => {
-        productWrap.innerHTML += `<li class="productCard">
-            <h4 class="productType">新品</h4>
-            <img
-              src="${item.images}"
-              alt=""
-            />
-            <a href="#" class="addCardBtn" data-id=${item.id}>加入購物車</a>
-            <h3>${item.title}</h3>
-            <del class="originPrice">NT$${item.origin_price}</del>
-            <p class="nowPrice">NT$${item.price}</p>
-          </li>`;
-      });
-      addToCartBtnListener();
+    renderProductList(productList, productWrap)
+  });
+  addToCartBtnListener();
 }
 
 // 為「加入購物車」按鈕加上事件監聽，取得購物車列表時就直接呼叫
@@ -99,11 +95,13 @@ function addToCart(e) {
       },
     })
     .then((res) => {
-      alert("新增購物車成功");
+      // alert("新增購物車成功");
+      console.log(res)
       getCardItem();
     })
     .catch((err) => {
-      alert("新增購物車失敗");
+      // alert("新增購物車失敗");
+      console.log(err)
     });
 }
 
@@ -117,6 +115,7 @@ function getCardItem() {
   axios
     .get(`${baseUrl}/api/livejs/v1/customer/${api_path}/carts`)
     .then((res) => {
+      console.log("[果實家居] 取得購物車列表...")
       cardItem = res.data.carts;
       shoppingCartTable.innerHTML = "";
       let string = `<caption></caption><tr>
@@ -165,16 +164,17 @@ function getCardItem() {
         let targetRemoveMsg = document.querySelector(".emptyCartMessage");
         targetRemoveMsg && shoppingCart.removeChild(targetRemoveMsg);
         shoppingCartTable.innerHTML = string;
+
         const discardAllBtn = document.querySelector(".discardAllBtn");
         discardAllBtn.addEventListener("click", discardAllItems);
       }
+      console.log("[果實家居] 取得購物車列表成功。");
     })
     .catch((err) => {
       console.log(err);
       alert("取得購物車列表失敗，請聯繫親切的工程師");
     });
 }
-// 編輯購物車產品數量
 
 // 刪除所有購物車資料
 function discardAllItems(e) {
@@ -212,4 +212,74 @@ function deleteItem(e) {
       });
   }
 }
-// 送出購買訂單
+// 組合訂單資料、送出購買訂單
+const submitBtn = document.querySelector(".orderInfo-btn");
+const customerName = document.getElementById("customerName");
+const customerPhone = document.getElementById("customerPhone");
+const customerEmail = document.getElementById("customerEmail");
+const customerAddress = document.getElementById("customerAddress");
+const tradeWay = document.getElementById("tradeWay");
+submitBtn.addEventListener("click", (e) => submitOrder(e));
+
+let orderData = {};
+
+function submitOrder(e) {
+  e.preventDefault();
+  setOrderInfo();
+  if(orderInfoStatue) {}
+  axios
+    .post(`${baseUrl}/api/livejs/v1/customer/${api_path}/orders`, {
+      data: orderData,
+    })
+    .then((res) => {
+      alert("送出訂單資料成功");
+      clearAllOrderInfo();
+      console.log(res);
+    })
+    .catch((err) => {
+      alert("送出訂單資料失敗，請聯繫親切的工程師");
+      console.log(err);
+    })
+}
+
+// 處理訂單資料顯示、資料處理邏輯
+
+// 處理訂單資料
+function setOrderInfo() {
+  let customerNameInfo = customerName.value;
+  let customerPhoneInfo = customerPhone.value;
+  let customerEmailInfo = customerEmail.value;
+  let customerAddressInfo = customerAddress.value;
+  let tradeWayInfo = tradeWay.value;
+
+  orderData = {
+    user: {
+      name: customerNameInfo,
+      tel: customerPhoneInfo,
+      email: customerEmailInfo,
+      address: customerAddressInfo,
+      payment: tradeWayInfo,
+    },
+  };
+}
+
+//表單「必填」顯示邏輯
+const orderInfoInput = document.querySelectorAll('.orderInfo-input');
+const orderInfoMessage = document.querySelectorAll('.orderInfo-message');
+let orderInfoStatue = false;
+
+function validateOrderInfo() {
+  orderInfoInput.forEach((item, index) => {
+    if (item.value == "") {
+        orderInfoMessage[index].style.display = 'block'
+        alert(`哎呀，預訂資料「${orderInfoMessage[index].dataset.message}」為必填項目，請填寫後再次送出，感恩`)
+    }
+  })
+}
+
+// 表單送出後，清除所有項目邏輯
+function clearAllOrderInfo() {
+  orderInfoInput.forEach(item => {
+    item.value = "";
+  })
+}

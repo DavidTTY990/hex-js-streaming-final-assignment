@@ -23,7 +23,7 @@
     <body>
       <nav class="topBar">
         <div class="wrap">
-          <h1><a href="#" class="logo">果實傢俱</a></h1>
+          <h1><a href="#" class="logo">果實家居</a></h1>
           <span class="material-icons menuToggle"> menu </span>
           <ul class="topBar-menu">
             <li><a href="#bedAdvantage">床墊優勢</a></li>
@@ -35,7 +35,7 @@
       </nav>
       <section class="wrap" id="bedAdvantage">
         <div class="banner">
-          <h2 class="banner-text">果實傢俱<br />跟您一起品味生活</h2>
+          <h2 class="banner-text">果實家居<br />跟您一起品味生活</h2>
         </div>
         <h3 class="section-title">床墊優勢</h3>
         <ul class="bedAdvantage">
@@ -371,11 +371,13 @@
             <label for="tradeWay" class="orderInfo-label">交易方式</label>
             <div class="orderInfo-inputWrap">
               <select id="tradeWay" class="orderInfo-input" name="交易方式">
-                <option value="ATM" selected>ATM</option>
+                <option value="" selected disabled>請選擇交易方式</option>
+                <option value="ATM">ATM</option>
                 <option value="信用卡">信用卡</option>
                 <option value="超商付款">超商付款</option>
               </select>
             </div>
+            <p class="orderInfo-message" data-message="交易方式">必選</p>
           </div>
           <input type="submit" value="送出預訂資料" class="orderInfo-btn" />
         </form>
